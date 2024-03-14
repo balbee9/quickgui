@@ -134,22 +134,22 @@ class _DownloaderState extends State<Downloader> {
         title: Text(
           context.t('Downloading {0}', args: [
             '${widget.operatingSystem.name} ${widget.version.version}' +
-                (widget.option!.option.isNotEmpty
+                (widget.option?.option.isNotEmpty == true
                     ? ' (${widget.option!.option})'
                     : '')
           ]),
         ),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder(
+      body: SingleChildScrollView( // Wrap the content in a SingleChildScrollView
+        child: Column(
+          children: [
+            StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
                 var data = !snapshot.hasData ||
-                        widget.option!.downloader != 'wget' ||
-                        widget.option!.downloader != 'aria2c'
+                        widget.option?.downloader != 'wget' &&
+                        widget.option?.downloader != 'aria2c'
                     ? null
                     : snapshot.data;
                 return Column(
@@ -158,7 +158,7 @@ class _DownloaderState extends State<Downloader> {
                     DownloadLabel(
                       downloadFinished: _downloadFinished,
                       data: snapshot.hasData ? snapshot.data : null,
-                      downloader: widget.option!.downloader,
+                      downloader: widget.option?.downloader,
                     ),
                     DownloadProgressBar(
                       downloadFinished: _downloadFinished,
@@ -173,15 +173,15 @@ class _DownloaderState extends State<Downloader> {
                 );
               },
             ),
-          ),
-          CancelDismissButton(
-            onCancel: () {
-              _process?.kill();
-            },
-            downloadFinished: _downloadFinished,
-          ),
-        ],
+            CancelDismissButton(
+              onCancel: () {
+                _process?.kill();
+              },
+              downloadFinished: _downloadFinished,
+            ),
+          ],
+        ),
       ),
     );
   }
-}
+}  

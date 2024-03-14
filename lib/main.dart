@@ -56,8 +56,8 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Don't forget to also change the size in linux/my_application.cc:50
-  setWindowMinSize(const Size(692, 580));
-  setWindowMaxSize(const Size(692, 580));
+  setWindowMinSize(const Size(800, 600));
+  setWindowMaxSize(const Size(1600, 1200));
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
     gOperatingSystems = await loadOperatingSystems(false);
