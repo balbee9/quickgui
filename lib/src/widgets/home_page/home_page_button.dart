@@ -35,15 +35,15 @@ class HomePageButton extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).canvasColor,
-                onPrimary: Theme.of(context).brightness == Brightness.dark
+                backgroundColor: Theme.of(context).canvasColor, // Changed from primary
+                foregroundColor: Theme.of(context).brightness == Brightness.dark // Changed from onPrimary
                     ? Colors.white70
                     : Theme.of(context).colorScheme.primary,
               ),
               onPressed: onPressed,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Text(text),
+                child: Text(text),  
               ),
             ),
           ],

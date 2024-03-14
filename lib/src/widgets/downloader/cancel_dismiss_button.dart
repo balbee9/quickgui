@@ -20,10 +20,10 @@ class CancelDismissButton extends StatelessWidget {
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).colorScheme.surface,
-              onPrimary: Theme.of(context).brightness == Brightness.dark
+              backgroundColor: Theme.of(context).colorScheme.surface, // Changed from primary
+              foregroundColor: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white70
-                  : Theme.of(context).colorScheme.primary,
+                  : Theme.of(context).colorScheme.primary, // Changed from onPrimary
             ),
             onPressed: !downloadFinished
                 ? onCancel
